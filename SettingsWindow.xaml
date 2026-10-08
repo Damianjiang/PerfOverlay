@@ -1,0 +1,99 @@
+<Window x:Class="PerfOverlay.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PerfOverlay 设置"
+        Width="420"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#F4F4F4">
+    <StackPanel Margin="16">
+        <GroupBox Header="显示内容" Padding="0,4,0,8">
+            <StackPanel Margin="4">
+                <CheckBox Content="CPU 使用率" IsChecked="{Binding ShowCpu, Mode=TwoWay}" Margin="0,3"/>
+                <CheckBox Content="内存使用率" IsChecked="{Binding ShowRam, Mode=TwoWay}" Margin="0,3"/>
+                <CheckBox Content="网络速度（下载 / 上传）" IsChecked="{Binding ShowNet, Mode=TwoWay}" Margin="0,3"/>
+                <CheckBox Content="GPU 使用率" IsChecked="{Binding ShowGpu, Mode=TwoWay}" Margin="0,3"/>
+                <CheckBox Content="显示半透明背景（提高可读性）" IsChecked="{Binding ShowBackground, Mode=TwoWay}" Margin="0,3"/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="外观" Margin="0,10,0,0" Padding="0,4,0,8">
+            <StackPanel Margin="4">
+                <Grid Margin="0,3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="44"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="字号" VerticalAlignment="Center"/>
+                    <Slider x:Name="FontSizeSlider" Grid.Column="1" Minimum="10" Maximum="40"
+                            TickFrequency="1" IsSnapToTickEnabled="True" VerticalAlignment="Center"
+                            Value="{Binding FontSize, Mode=TwoWay}"/>
+                    <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Text="{Binding Value, ElementName=FontSizeSlider}"/>
+                </Grid>
+                <Grid Margin="0,3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="44"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="不透明度" VerticalAlignment="Center"/>
+                    <Slider x:Name="OpacitySlider" Grid.Column="1" Minimum="0.2" Maximum="1"
+                            TickFrequency="0.05" IsSnapToTickEnabled="True" VerticalAlignment="Center"
+                            Value="{Binding TextOpacity, Mode=TwoWay}"/>
+                    <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Text="{Binding Value, ElementName=OpacitySlider, StringFormat={}{0:P0}}"/>
+                </Grid>
+                <Grid Margin="0,3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="文字颜色" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="ColorBox" Grid.Column="1" Width="150" HorizontalAlignment="Left"
+                              VerticalAlignment="Center"/>
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="悬浮窗位置" Margin="0,10,0,0" Padding="0,4,0,8">
+            <StackPanel Margin="4">
+                <TextBlock x:Name="PositionLabel" Text="当前位置：X = --，Y = --" Margin="0,2"/>
+                <Button x:Name="PositionDragButton" Content="① 点击后拖动悬浮窗到想要的位置"
+                        Width="280" HorizontalAlignment="Left" Margin="0,6,0,0" Padding="8,4" Click="PositionDrag_Click"/>
+                <TextBlock Text="保存设置时位置会自动写入配置文件；也可以取消勾选“锁定位置”后随时直接拖动悬浮窗。"
+                           FontSize="11" Foreground="#888888" TextWrapping="Wrap" Margin="0,4,0,0"/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="行为" Margin="0,10,0,0" Padding="0,4,0,8">
+            <StackPanel Margin="4">
+                <Grid Margin="0,3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="刷新间隔" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="IntervalBox" Grid.Column="1" Width="150" HorizontalAlignment="Left"
+                              VerticalAlignment="Center"/>
+                </Grid>
+                <CheckBox Content="锁定位置（鼠标穿透，不可拖动）" IsChecked="{Binding LockPosition, Mode=TwoWay}" Margin="0,6,0,2"/>
+                <TextBlock Text="提示：取消锁定后，按住鼠标左键即可拖动悬浮窗到合适位置。"
+                           FontSize="11" Foreground="#888888" TextWrapping="Wrap" Margin="0,2"/>
+                <CheckBox Content="开机自动启动" IsChecked="{Binding RunAtStartup, Mode=TwoWay}" Margin="0,6,0,2"/>
+                <Button Content="将悬浮窗复位到屏幕左上角" Width="180" HorizontalAlignment="Left"
+                        Margin="0,8,0,0" Padding="8,4" Click="ResetPosition_Click"/>
+            </StackPanel>
+        </GroupBox>
+
+        <Grid Margin="0,14,0,0">
+            <Button Content="关于" Width="88" Padding="0,5" HorizontalAlignment="Left" Click="About_Click"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="保存" Width="88" Padding="0,5" IsDefault="True" Click="Save_Click"/>
+                <Button Content="取消" Width="88" Padding="0,5" Margin="10,0,0,0" IsCancel="True" Click="Cancel_Click"/>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</Window>
