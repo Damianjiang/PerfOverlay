@@ -35,7 +35,15 @@
 
 ## 🚀 快速上手
 
-### 从源码构建（需 .NET 9 SDK，Windows）
+### 方式一：直接运行（无需安装/编译，Windows x64）
+
+编译产物已包含在仓库 `release/win-x64/` 目录（自包含，内置 .NET 运行时）：
+
+```
+release/win-x64/PerfOverlay.exe   # 整目录拷到任意位置，双击 exe 即可运行
+```
+
+### 方式二：从源码构建（需 .NET 9 SDK，Windows）
 
 ```bash
 git clone https://github.com/Damianjiang/PerfOverlay.git
