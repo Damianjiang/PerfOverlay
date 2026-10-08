@@ -1,0 +1,32 @@
+# Build output
+bin/
+obj/
+publish/
+artifacts/
+*.user
+*.suo
+
+# IDE
+.vs/
+.idea/
+
+# AI agent traces
+.claude/
+.cursor/
+.opencode/
+.aider/
+.windsurf/
+.devin/
+.roo/
+.codex/
+.continue/
+.amp/
+.augment/
+.lingma/
+.trae/
+.githooks/
+
+# OS / misc
+Thumbs.db
+desktop.ini
+.DS_Store
